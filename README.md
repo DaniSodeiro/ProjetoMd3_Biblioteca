@@ -18,4 +18,6 @@ Implementação do Banco de Dados
 
 A implementação do banco de dados foi realizada usando o MySQL Workbench. Foram criadas as tabelas conforme a modelagem, e foram inseridos pelo menos 5 registros em cada tabela para fins de teste.
 
+link para visualizar o DBDiagram: https://dbdiagram.io/d/64c3dcd702bd1c4a5edf1b07
+
 Desenvolvido por Daniela Sodeiro Silva.
