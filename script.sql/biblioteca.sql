@@ -4,46 +4,46 @@ CREATE DATABASE IF NOT EXISTS Biblioteca;
 -- Selecionando banco de Dados 
 USE Biblioteca;
 
--- Tabela para armazenar informações sobre os livros
-CREATE TABLE IF NOT EXISTS livro (
-    id INT AUTO_INCREMENT PRIMARY KEY, 
-    titulo VARCHAR(255),         
-    ISBN VARCHAR(20), -- Número de identificação do livro
-    ano_publicacao INT,            
-    editora_id INT,                 
-    genero_id INT                     
-);
-
 -- Tabela para armazenar informações sobre os autores
-CREATE TABLE IF NOT EXISTS Autor (
-    id INT AUTO_INCREMENT PRIMARY KEY, 
-    nome VARCHAR(255),              
-    data_nascimento DATE,             
-    pais_origem VARCHAR(255)        
+CREATE TABLE IF NOT EXISTS `Autor` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `nome` VARCHAR (255),
+  `data_nascimento` DATE,
+  `pais_origem` VARCHAR (255)
 );
 
 -- Tabela para armazenar informações sobre as editoras
-CREATE TABLE IF NOT EXISTS Editora (
-    id INT AUTO_INCREMENT PRIMARY KEY, 
-    nome VARCHAR(255),                
-    endereco VARCHAR(255),           
-    telefone VARCHAR(20)             
+CREATE TABLE IF NOT EXISTS `Editora` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `nome` VARCHAR (255),
+  `endereco` VARCHAR (255),
+  `telefone` VARCHAR (255)
 );
 
--- Tabela para armazenar informações sobre os gêneros 
-CREATE TABLE IF NOT EXISTS Genero (
-   id INT AUTO_INCREMENT PRIMARY KEY, 
-    nome VARCHAR(255)                
+-- Tabela para armazenar informações sobre os generos
+CREATE TABLE IF NOT EXISTS `Genero` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `nome` VARCHAR (255)
 );
 
--- Inserindo dados na tabela livro
-INSERT INTO livro (titulo, ISBN, ano_publicacao, editora_id, genero_id)
-VALUES
-  ('Orgulho e Preconceito', '9876543211234', 1813, 1, 1),
-  ('Alice no País das Maravilhas', '9875645435432', 1865, 2, 2),
-  ('O Código Da Vinci', '8575421459566', 2003, 3, 3),
-  ('O Sol é para Todos', '1238503010331', 1960, 4, 4),
-  ('A Menina que Roubava Livros', '6543289765432', 2005, 5, 5);
+-- Tabela para armazenar informações sobre os livros
+CREATE TABLE IF NOT EXISTS `Livro` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `titulo` VARCHAR (255),
+  `ISBN` VARCHAR (255),
+  `ano_publicacao` INT,
+  `editora_id` INT,
+  `genero_id` INT,
+  `autor_id` INT
+);
+
+-- Adicionando chave estrangeira na tabela Livro para relacionamentos
+ALTER TABLE `Livro` ADD FOREIGN KEY (`editora_id`) REFERENCES `Editora` (`id`);
+
+ALTER TABLE `Livro` ADD FOREIGN KEY (`genero_id`) REFERENCES `Genero` (`id`);
+
+ALTER TABLE `Livro` ADD FOREIGN KEY (`autor_id`) REFERENCES `Autor` (`id`);
+
 
 -- Inserindo dados na tabela Autor
 INSERT INTO Autor (nome, data_nascimento, pais_origem)
@@ -72,24 +72,11 @@ VALUES
 ('Drama'),
 ('Ficção');
 
--- Adicionando chave estrangeira para relacionamento com a tabela Autor
-ALTER TABLE livro
-ADD COLUMN autor_id INT,
-ADD CONSTRAINT fk_autor_id
-FOREIGN KEY (autor_id)
-REFERENCES Autor (id);
-    
--- Adicionando chave estrangeira para relacionamento com a tabela Editora
-ALTER TABLE livro
-ADD COLUMN editora_id INT,
-ADD CONSTRAINT fk_editora_id
-FOREIGN KEY (editora_id)
-REFERENCES Editora (id);
-
--- Adicionando chave estrangeira para relacionamento com a tabela Genero
-ALTER TABLE livro
-ADD COLUMN genero_id INT,
-ADD CONSTRAINT fk_genero_id
-FOREIGN KEY (genero_id)
-REFERENCES Genero (id);
-
+-- Inserindo dados na tabela livro
+INSERT INTO livro (titulo, ISBN, ano_publicacao,autor_id, editora_id, genero_id)
+VALUES
+  ('Orgulho e Preconceito', '9876543211234', 1813, 1, 1, 1),
+  ('Alice no País das Maravilhas', '9875645435432', 1865, 2, 2, 2),
+  ('O Código Da Vinci', '8575421459566', 2003, 3, 3, 3),
+  ('O Sol é para Todos', '1238503010331', 1960, 4, 4, 4),
+  ('A Menina que Roubava Livros', '6543289765432', 2005, 5, 5, 5);
