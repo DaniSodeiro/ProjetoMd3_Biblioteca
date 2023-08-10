@@ -1,5 +1,11 @@
+-- Criando banco de dados 
+CREATE DATABASE IF NOT EXISTS Biblioteca;
+
+-- Selecionando banco de Dados 
+USE Biblioteca;
+
 -- Tabela para armazenar informações sobre os livros
-CREATE TABLE livro (
+CREATE TABLE IF NOT EXISTS livro (
     id INT AUTO_INCREMENT PRIMARY KEY, 
     titulo VARCHAR(255),         
     ISBN VARCHAR(20), -- Número de identificação do livro
@@ -9,7 +15,7 @@ CREATE TABLE livro (
 );
 
 -- Tabela para armazenar informações sobre os autores
-CREATE TABLE Autor (
+CREATE TABLE IF NOT EXISTS Autor (
     id INT AUTO_INCREMENT PRIMARY KEY, 
     nome VARCHAR(255),              
     data_nascimento DATE,             
@@ -17,7 +23,7 @@ CREATE TABLE Autor (
 );
 
 -- Tabela para armazenar informações sobre as editoras
-CREATE TABLE Editora (
+CREATE TABLE IF NOT EXISTS Editora (
     id INT AUTO_INCREMENT PRIMARY KEY, 
     nome VARCHAR(255),                
     endereco VARCHAR(255),           
@@ -25,7 +31,7 @@ CREATE TABLE Editora (
 );
 
 -- Tabela para armazenar informações sobre os gêneros 
-CREATE TABLE Genero (
+CREATE TABLE IF NOT EXISTS Genero (
    id INT AUTO_INCREMENT PRIMARY KEY, 
     nome VARCHAR(255)                
 );
